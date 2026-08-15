@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05060f" />
+    <title>Space Wonderers</title>
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <div id="vignette"></div>
+
+    <main id="start-screen" class="screen visible">
+      <section class="panel">
+        <div class="eyebrow">Wonderer Flight Program // Sortie 001</div>
+        <h1>Space<br />Wonderers</h1>
+        <p class="subtitle">Nobody knows what is out there. Go and see.</p>
+        <button id="start-button" class="action-button" type="button">
+          Launch
+        </button>
+        <div class="controls">
+          <span><b>W A S D</b> Steer</span>
+          <span><b>Q E</b> Roll</span>
+          <span><b>Shift / Ctrl</b> Throttle</span>
+          <span><b>Space</b> Hold for warp</span>
+        </div>
+      </section>
+    </main>
+
+    <main id="pause-screen" class="screen">
+      <section class="panel">
+        <div class="eyebrow">Flight suspended // Engines idling</div>
+        <h2>Paused</h2>
+        <p class="subtitle">The stars will wait.</p>
+        <button id="resume-button" class="action-button" type="button">
+          Resume
+        </button>
+        <div class="controls">
+          <span><b>W A S D</b> Steer</span>
+          <span><b>Q E</b> Roll</span>
+          <span><b>Shift / Ctrl</b> Throttle</span>
+          <span><b>Space</b> Hold for warp</span>
+        </div>
+        <p class="hint">Press ESC to head back out</p>
+      </section>
+    </main>
+
+    <section id="hud" class="hidden" aria-label="Flight display">
+      <div class="hud-block hud-speed">
+        <span>Velocity</span><strong id="speed">0</strong><small>km/s</small>
+      </div>
+      <div class="hud-block hud-warp">
+        <span>Warp core</span>
+        <div class="meter"><i id="warp-bar"></i></div>
+        <small id="warp-status">Hold SPACE</small>
+      </div>
+      <div class="hud-block hud-log">
+        <span>Sector</span><strong id="sector">Aurora</strong>
+        <small><b id="distance">0.00</b> AU travelled</small>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

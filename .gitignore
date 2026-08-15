@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Tool caches
+.vite/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Meshy generation records (the shipped model lives in public/models/)
+meshy_output/

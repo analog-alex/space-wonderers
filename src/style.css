@@ -1,0 +1,265 @@
+:root {
+  color: #e6f0ff;
+  background: #05060f;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-synthesis: none;
+  --violet: #a08bff;
+  --cyan: #6fe7ff;
+  --rose: #ff8fc8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  touch-action: none;
+}
+
+#vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    transparent 45%,
+    rgba(3, 4, 14, 0.35) 76%,
+    rgba(2, 2, 10, 0.85) 115%
+  );
+}
+
+.hidden {
+  display: none;
+}
+
+/* Start screen */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  place-items: center;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(24, 18, 60, 0.7),
+    rgba(4, 4, 14, 0.95)
+  );
+  backdrop-filter: blur(6px);
+  animation: fade-in 0.6s ease both;
+}
+
+.screen.visible {
+  display: grid;
+}
+
+.screen.leaving {
+  animation: fade-out 0.7s ease both;
+}
+
+.panel {
+  width: min(620px, calc(100vw - 40px));
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+h1,
+h2 {
+  margin: 18px 0 0;
+  font-size: clamp(48px, 12vw, 96px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 60px rgba(160, 139, 255, 0.55);
+}
+
+h2 {
+  font-size: clamp(38px, 8vw, 64px);
+}
+
+.subtitle {
+  margin: 22px 0 34px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: rgba(230, 240, 255, 0.62);
+}
+
+.action-button {
+  padding: 14px 46px;
+  color: #05060f;
+  background: linear-gradient(120deg, var(--cyan), var(--violet));
+  border: 0;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0 40px rgba(111, 231, 255, 0.28);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 60px rgba(160, 139, 255, 0.5);
+}
+
+.action-button:focus-visible {
+  outline: 1px solid var(--cyan);
+  outline-offset: 5px;
+}
+
+.hint {
+  margin: 34px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(230, 240, 255, 0.32);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  justify-content: center;
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(230, 240, 255, 0.45);
+}
+
+.controls b {
+  color: var(--cyan);
+  font-weight: 500;
+}
+
+/* HUD */
+
+#hud {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 5;
+  display: flex;
+  gap: 28px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 32px 28px;
+  pointer-events: none;
+  animation: fade-in 1.2s ease both;
+}
+
+.hud-block {
+  display: grid;
+  gap: 4px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(230, 240, 255, 0.45);
+}
+
+.hud-block strong {
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: #e6f0ff;
+  text-shadow: 0 0 24px rgba(111, 231, 255, 0.35);
+}
+
+.hud-block small {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.hud-block b {
+  color: var(--cyan);
+  font-weight: 400;
+}
+
+.hud-warp {
+  justify-items: center;
+  text-align: center;
+}
+
+.hud-log {
+  justify-items: end;
+  text-align: right;
+}
+
+.meter {
+  width: 220px;
+  height: 3px;
+  margin: 8px 0 6px;
+  background: rgba(230, 240, 255, 0.14);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.meter i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--rose));
+  transition: width 0.12s linear;
+}
+
+.hud-warp.engaged small {
+  color: var(--rose);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  #hud {
+    padding: 0 18px 20px;
+    gap: 14px;
+  }
+  .meter {
+    width: 120px;
+  }
+  .hud-block strong {
+    font-size: 22px;
+  }
+}
