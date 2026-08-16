@@ -58,7 +58,23 @@
         <span>Sector</span><strong id="sector">Aurora</strong>
         <small><b id="distance">0.00</b> AU travelled</small>
       </div>
+      <div id="boundary-warning" class="hud-warning">
+        System boundary — turn back
+      </div>
     </section>
+
+    <main id="gameover-screen" class="screen">
+      <section id="gameover-panel" class="panel">
+        <div id="gameover-eyebrow" class="eyebrow">Anomaly encountered</div>
+        <h2 id="gameover-title">Consumed by the void</h2>
+        <p id="gameover-subtitle" class="subtitle">
+          The Wonderer's telemetry ends at the event horizon.
+        </p>
+        <button id="restart-button" class="action-button" type="button">
+          Restart
+        </button>
+      </section>
+    </main>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
