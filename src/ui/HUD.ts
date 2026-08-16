@@ -5,6 +5,8 @@ export interface Telemetry {
   speed: number;
   warp: number;
   distance: number;
+  /** 0..1, how deep into the boundary pushback zone the ship is. */
+  boundaryWarning: number;
 }
 
 export class HUD {
@@ -15,13 +17,18 @@ export class HUD {
   private readonly warpBlock = document.querySelector(".hud-warp");
   private readonly sector = element("sector");
   private readonly distance = element("distance");
+  private readonly boundaryWarning = element("boundary-warning");
   private lastSector = "";
 
   show(): void {
     this.root.classList.remove("hidden");
   }
 
-  update({ speed, warp, distance }: Telemetry): void {
+  hide(): void {
+    this.root.classList.add("hidden");
+  }
+
+  update({ speed, warp, distance, boundaryWarning }: Telemetry): void {
     this.speed.textContent = Math.round(speed).toLocaleString("en-US");
     this.warpBar.style.width = `${warp * 100}%`;
 
@@ -41,5 +48,11 @@ export class HUD {
       this.sector.textContent = sector;
       this.lastSector = sector;
     }
+
+    this.boundaryWarning.classList.toggle("visible", boundaryWarning > 0.02);
+    this.boundaryWarning.style.setProperty(
+      "--boundary-intensity",
+      `${boundaryWarning}`
+    );
   }
 }

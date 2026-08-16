@@ -41,3 +41,83 @@ export const SECTORS = [
   "Halcyon Deep",
   "Perihelion",
 ];
+
+/** Half the side of the flyable cube: a 5 AU box centred on the system. */
+export const SYSTEM_HALF_EXTENT = 2.5 * UNITS_PER_AU;
+/** Distance from the wall at which the soft pushback starts. */
+export const BOUNDARY_MARGIN = 1400;
+/** Inward acceleration applied at full boundary penetration. */
+export const BOUNDARY_PUSH_ACCEL = 260;
+
+/** Ship's starting absolute position: out near a wall, system ahead. */
+export const SHIP_START_POSITION = { x: 0, y: 400, z: 12000 };
+
+export const STAR_RADIUS = 900;
+export const STAR_COLOR = 0xffd27a;
+export const STAR_LIGHT_INTENSITY = 7;
+export const STAR_LIGHT_RANGE = SYSTEM_HALF_EXTENT * 1.4;
+
+/** Linear orbital speed shared by every planet, world units/second — same
+ * units as ship speed (labelled km/s on the HUD). Each planet's angular
+ * speed is derived from this and its own orbit radius. */
+export const PLANET_ORBIT_SPEED = 100;
+
+export interface PlanetConfig {
+  name: string;
+  color: number;
+  radius: number;
+  orbitRadius: number;
+  /** Orbital plane tilt away from Y=0, radians. */
+  tilt: number;
+  /** Starting phase around the orbit, radians. */
+  phase: number;
+  banded?: boolean;
+  ring?: boolean;
+}
+
+export const PLANETS: PlanetConfig[] = [
+  {
+    name: "Rocky Planet",
+    color: 0xd97a6a,
+    radius: 110,
+    orbitRadius: 2400,
+    tilt: 0.02,
+    phase: 0.4,
+  },
+  {
+    name: "Earth-like Planet",
+    color: 0x5aa7e8,
+    radius: 170,
+    orbitRadius: 4600,
+    tilt: -0.035,
+    phase: 2.1,
+  },
+  {
+    name: "Gaseous Planet",
+    color: 0x8fe0b8,
+    radius: 340,
+    orbitRadius: 7600,
+    tilt: 0.05,
+    phase: 4.3,
+    banded: true,
+    ring: true,
+  },
+];
+
+/** Tucked off the ecliptic, toward a corner of the cube. */
+export const BLACK_HOLE_POSITION = {
+  x: -11000,
+  y: 4200,
+  z: -9200,
+};
+export const BLACK_HOLE_RADIUS = 260;
+export const BLACK_HOLE_DISK_RADIUS = 1500;
+export const BLACK_HOLE_PULL_RADIUS = 3400;
+export const BLACK_HOLE_CAPTURE_RADIUS = 420;
+/** Peak inward acceleration at the capture radius, falling off with distance
+ * squared out to BLACK_HOLE_PULL_RADIUS. */
+export const BLACK_HOLE_PULL_ACCEL = 2200;
+
+/** Seconds the capture cinematic runs before the Game Over screen appears. */
+export const CAPTURE_DURATION = 2.6;
+export const CAPTURE_SPIN_RATE = 5.5;
